@@ -12,9 +12,3 @@ variable "region-worker" {
   type    = string
   default = "us-west-2"
 }
-
-variable "region-worker-2" {
-  type    = string
-  default = "us-east-2"
-
-}
