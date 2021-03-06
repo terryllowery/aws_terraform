@@ -133,5 +133,5 @@ resource "aws_route_table" "internet_route_oregon" {
 resource "aws_main_route_table_association" "set-worker-default-rt-assoc" {
   provider       = aws.region-worker
   vpc_id         = aws_vpc.vpc_master_oregon.id
-  route_table_id = aws_route_table.internet_route.id
+  route_table_id = aws_route_table.internet_route_oregon.id
 }
