@@ -1,3 +1,5 @@
+# ********   VPC setups ********* #
+
 #Create VPC in us-east-1
 resource "aws_vpc" "vpc_master" {
   provider             = aws.region-master
@@ -20,17 +22,7 @@ resource "aws_vpc" "vpc_master_oregon" {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
+# ********   Gateway setups ********* #
 
 #Create IGW in us-east-1 
 resource "aws_internet_gateway" "igw" {
@@ -43,6 +35,8 @@ resource "aws_internet_gateway" "igw-oregon" {
   provider = aws.region-worker
   vpc_id   = aws_vpc.vpc_master_oregon.id
 }
+
+# ********   Subnet Setups ********* #
 
 #Get all available AZ's in VPC for master region
 data "aws_availability_zones" "azs" {
