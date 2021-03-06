@@ -20,6 +20,16 @@ resource "aws_vpc" "vpc_master_oregon" {
   }
 }
 
+#Create VPC in us-east-2
+resource "aws_vpc" "vpc_master_2" {
+  provider = aws.region-worker-2
+  cidr_block = "172.16.0.0/24"
+  enable_dns_support = true
+  enable_dns_hostnames = true
+  tags = {
+    Name = "worker2-vpc-jenkins"
+  }
+}
 
 
 
@@ -39,10 +49,16 @@ resource "aws_internet_gateway" "igw" {
   vpc_id   = aws_vpc.vpc_master.id
 }
 
-#Create IGW is us-west-2
+#Create IGW in us-west-2
 resource "aws_internet_gateway" "igw-oregon" {
   provider = aws.region-worker
   vpc_id   = aws_vpc.vpc_master_oregon.id
+}
+
+#Create IGW in us-east-2
+resource "aws_internet_gateway" "igw-worker2" {
+  provider = aws.region-worker-2
+  vpc_id = aws_vpc.vpc_master_2.id
 }
 
 #Get all available AZ's in VPC for master region
@@ -72,4 +88,11 @@ resource "aws_subnet" "subnet_1_oregon" {
   provider   = aws.region-worker
   vpc_id     = aws_vpc.vpc_master_oregon.id
   cidr_block = "192.168.1.0/24"
+}
+
+#Create subnet in us-east-2
+resource "aws_subnet" "subnet_3" {
+  provider = aws.region-worker2
+  vpc_id = aws.vpc.vpc_master_2.id
+  cidr_block = "172.16.0.1/24"
 }
