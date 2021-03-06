@@ -23,7 +23,7 @@ resource "aws_vpc" "vpc_master_oregon" {
 #Create VPC in us-east-2
 resource "aws_vpc" "vpc_master_2" {
   provider             = aws.region-worker-2
-  cidr_block           = "172.16.0.0/24"
+  cidr_block           = "172.16.0.0/12"
   enable_dns_support   = true
   enable_dns_hostnames = true
   tags = {
