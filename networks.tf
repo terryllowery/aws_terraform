@@ -44,12 +44,6 @@ resource "aws_internet_gateway" "igw-oregon" {
   vpc_id   = aws_vpc.vpc_master_oregon.id
 }
 
-#Create IGW in us-east-2
-resource "aws_internet_gateway" "igw-worker2" {
-  provider = aws.region-worker-2
-  vpc_id   = aws_vpc.vpc_master_2.id
-}
-
 #Get all available AZ's in VPC for master region
 data "aws_availability_zones" "azs" {
   provider = aws.region-master
